@@ -344,17 +344,14 @@ public class Principal extends javax.swing.JFrame {
     registroAlumnos.setVisible(true);    }//GEN-LAST:event_jmRegistroAlumnosActionPerformed
 
     private void CerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarSesionActionPerformed
-  // Cierra la ventana actual
-
+    // Cierra la ventana principal
+    this.dispose(); 
 
     // Muestra la ventana de inicio de sesión
     java.awt.EventQueue.invokeLater(() -> {
-        // Crea una nueva instancia de InicioSesion
         InicioSesion inicioSesion = new InicioSesion();
-
-        // Muestra la ventana de inicio de sesión
         inicioSesion.setVisible(true);
-    });        // TODO add your handling code here:
+    });
     }//GEN-LAST:event_CerrarSesionActionPerformed
 
     private void gMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gMateriasActionPerformed
