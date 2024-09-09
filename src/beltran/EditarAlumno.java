@@ -181,7 +181,7 @@ public class EditarAlumno extends JFrame {
                         txtApellido.setText(rs.getString("apellido"));
                         txtCarrera.setText(rs.getString("carrera"));
                         txtLegajo.setText(rs.getString("legajo"));
-                        txtFotoRuta.setText(rs.getString("foto_ruta"));
+                        txtFotoRuta.setText(rs.getString("ruta_foto"));
                         txtDomicilio.setText(rs.getString("domicilio"));
                         txtAltura.setText(rs.getString("altura"));
                         txtLocalidad.setText(rs.getString("localidad"));
@@ -259,7 +259,7 @@ public class EditarAlumno extends JFrame {
         if (confirm == JOptionPane.OK_OPTION) {
             // Guardar los datos si el usuario confirma
             try (Connection conn = Conexion.getConnection()) {
-                String sqlUpdate = "UPDATE alumnos SET nombres = ?, apellido = ?, carrera = ?, foto_ruta = ?, domicilio = ?, altura = ?, localidad = ?, provincia = ?, fecha_nacimiento = ?, ano_ingreso = ?, email = ?, estado = ? WHERE dni = ?";
+                String sqlUpdate = "UPDATE alumnos SET nombres = ?, apellido = ?, carrera = ?, ruta_foto = ?, domicilio = ?, altura = ?, localidad = ?, provincia = ?, fecha_nacimiento = ?, ano_ingreso = ?, email = ?, estado = ? WHERE dni = ?";
                 try (PreparedStatement stmtUpdate = conn.prepareStatement(sqlUpdate)) {
                     stmtUpdate.setString(1, nombres);
                     stmtUpdate.setString(2, apellido);
@@ -308,7 +308,7 @@ public class EditarAlumno extends JFrame {
                             rs.getString("nombres"),
                             rs.getString("apellido"),
                             rs.getString("carrera"),
-                            rs.getString("foto_ruta"),
+                            rs.getString("ruta_foto"),
                             rs.getString("domicilio"),
                             rs.getString("altura"),
                             rs.getString("localidad"),
