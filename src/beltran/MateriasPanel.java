@@ -3,6 +3,7 @@ package beltran;
 import Materias.CarreraComboBox;
 import Materias.MateriaService;
 import com.formdev.flatlaf.FlatLightLaf;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -111,15 +112,12 @@ public class MateriasPanel extends JPanel {
         btnRegistrarMateria.setBackground(new Color(0, 123, 255));
         btnRegistrarMateria.setForeground(Color.WHITE);
         btnRegistrarMateria.setFocusPainted(false);
-        btnRegistrarMateria.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                registrarMateria(
+        btnRegistrarMateria.addActionListener((ActionEvent e) -> {
+            registrarMateria(
                     (String) cmbRegistroCarrera.getSelectedItem(),
                     (Integer) cmbRegistroAno.getSelectedItem(),
                     txtNuevaMateria.getText()
-                );
-            }
+            );
         });
         panelRegistro.add(btnRegistrarMateria, gbc);
 
@@ -148,7 +146,6 @@ public class MateriasPanel extends JPanel {
                 JOptionPane.showMessageDialog(this, "No se encontraron materias para la carrera seleccionada.", "Información", JOptionPane.INFORMATION_MESSAGE);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error al cargar materias: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -162,10 +159,12 @@ public class MateriasPanel extends JPanel {
             materiaService.registrarMateria(carrera, ano, materia);
             JOptionPane.showMessageDialog(this, "Materia registrada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             txtNuevaMateria.setText("");
-        } catch (Exception e) {
+        } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error al registrar materia: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {

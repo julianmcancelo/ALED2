@@ -5,7 +5,7 @@
 package beltran;
 import Materias.CarrerasPanel;
 import Materias.MateriaService;
-import Materias.AsistenciaPanel;
+import Materias.AsistenciaPanel2;
 import beltran.Clases.ServicioLogin;
 import beltran.Clases.ServicioLogin.RolUsuario;
 import beltran.Clases.ServicioLogin.SessionManager;
@@ -19,6 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
 /**
  *
  * @author julia
@@ -125,6 +126,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         gCarreras = new javax.swing.JMenuItem();
         gMaterias = new javax.swing.JMenuItem();
+        jMComision = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jAdministrador = new javax.swing.JMenu();
         jmCrearUsuario = new javax.swing.JMenuItem();
@@ -220,6 +222,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMenu4.add(gMaterias);
+
+        jMComision.setText("Gestión Comisiones");
+        jMComision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMComisionActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMComision);
 
         jMenuBar1.add(jMenu4);
 
@@ -378,7 +388,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
  MateriaService materiaService = new MateriaService();
-    AsistenciaPanel asistenciaPanel = new AsistenciaPanel(materiaService);
+    AsistenciaPanel2 asistenciaPanel = new AsistenciaPanel2(materiaService);
     
     JFrame frame = new JFrame("Gestión de Asistencia");
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -386,6 +396,16 @@ public class Principal extends javax.swing.JFrame {
     frame.add(asistenciaPanel);
     frame.setVisible(true);
        }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMComisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMComisionActionPerformed
+      // Crear una instancia de CrearComisionFrame
+    CrearComisionFrame crearComisionFrame = new CrearComisionFrame();
+    
+    // Hacer visible el frame
+    crearComisionFrame.setVisible(true);
+    
+ 
+    }//GEN-LAST:event_jMComisionActionPerformed
     
     /**
      * @param args the command line arguments
@@ -401,6 +421,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jAdministrador;
     private javax.swing.JMenuItem jEAlumnos;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuItem jMComision;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
