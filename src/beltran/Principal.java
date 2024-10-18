@@ -336,11 +336,19 @@ public class Principal extends javax.swing.JFrame {
     seleccionarAlumno.setVisible(true);    }//GEN-LAST:event_jEAlumnosActionPerformed
 
     private void jmCrearUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCrearUsuarioActionPerformed
+  // Verifica si el rol del usuario no es ADMINISTRADOR
     if (rolUsuario != RolUsuario.ADMINISTRADOR) {
-        // Mostrar mensaje de error si no es administrador
-        JOptionPane.showMessageDialog(this, "No tiene permisos para acceder a esta función.", "Acceso Denegado", JOptionPane.ERROR_MESSAGE);
-        return; // Evitar que se ejecute el código de la acción
+        // Si no tiene permisos, muestra un mensaje de error
+        JOptionPane.showMessageDialog(this, 
+            "No tiene permisos para acceder a esta función.", 
+            "Acceso Denegado", 
+            JOptionPane.ERROR_MESSAGE);
+        return; // Salir del método para evitar que se ejecute el código adicional
     }
+    
+    // Si el usuario es administrador, se puede abrir la ventana CrearUsuario
+    CrearUsuario crearUsuario = new CrearUsuario();
+    crearUsuario.setVisible(true); // Hacer visible la ventana de CrearUsuario
     
     // Aquí va el código que debe ejecutarse si el usuario es administrador
     // TODO add your handling code here:

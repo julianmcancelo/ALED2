@@ -1,6 +1,5 @@
 package beltran;
 
-
 import beltran.Clases.Conexion;
 import com.formdev.flatlaf.FlatLightLaf;
 import javax.swing.*;
@@ -130,9 +129,13 @@ public class SeleccionarAlumno extends JFrame {
             stmt.setString(3, busquedaParam);
             try (ResultSet rs = stmt.executeQuery()) {
                 cmbAlumnos.removeAllItems(); // Limpia el JComboBox antes de añadir nuevos elementos
-                while (rs.next()) {
-                    String alumnoInfo = rs.getString("dni") + " - " + rs.getString("apellido") + " - " + rs.getString("carrera");
-                    cmbAlumnos.addItem(alumnoInfo);
+                if (!rs.isBeforeFirst()) { // Verifica si hay resultados
+                    JOptionPane.showMessageDialog(this, "No se encontraron resultados para la búsqueda.", "Información", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    while (rs.next()) {
+                        String alumnoInfo = rs.getString("dni") + " - " + rs.getString("apellido") + " - " + rs.getString("carrera");
+                        cmbAlumnos.addItem(alumnoInfo);
+                    }
                 }
             }
         } catch (SQLException e) {
