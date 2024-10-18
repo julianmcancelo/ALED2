@@ -33,11 +33,11 @@ public class CrearUsuario extends javax.swing.JFrame {
 
     private void configurarVentana() {
         setTitle("Registro de Usuario");
-        setSize(400, 350);
+        setSize(400, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setResizable(false);
-        getContentPane().setBackground(new Color(240, 240, 240)); // Color de fondo suave
+        getContentPane().setBackground(new Color(240, 240, 240));
     }
 
     @SuppressWarnings("unchecked")
@@ -57,26 +57,32 @@ public class CrearUsuario extends javax.swing.JFrame {
         txtLegajo = new JTextField();
         cmbPermisos = new JComboBox<>(new String[]{"Usuario", "Administrador"});
 
-        // Configuración de botones
-        btnGuardar.setBackground(new Color(76, 175, 80)); // Color verde
+        // Estilo de botones
+        btnGuardar.setBackground(new Color(76, 175, 80));
         btnGuardar.setForeground(Color.WHITE);
         btnGuardar.setFocusPainted(false);
         btnGuardar.addActionListener(evt -> btnGuardarActionPerformed(evt));
 
-        btnCancelar.setBackground(new Color(255, 82, 82)); // Color rojo
+        btnCancelar.setBackground(new Color(255, 82, 82));
         btnCancelar.setForeground(Color.WHITE);
         btnCancelar.setFocusPainted(false);
         btnCancelar.addActionListener(evt -> this.dispose());
 
-        layoutComponents();
+        // Panel principal con borde
+        JPanel panel = new JPanel();
+        panel.setBorder(BorderFactory.createTitledBorder("Crear Nuevo Usuario"));
+        panel.setBackground(new Color(240, 240, 240));
+        layoutComponents(panel);
+
+        add(panel);
         pack();
     }
 
-    private void layoutComponents() {
-        JPanel panel = new JPanel(new GridBagLayout());
+    private void layoutComponents(JPanel panel) {
+        panel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 10, 10, 10); // Espaciado entre componentes
+        gbc.insets = new Insets(10, 10, 10, 10);
 
         gbc.gridx = 0; gbc.gridy = 0; panel.add(jLabel1, gbc);
         gbc.gridx = 1; panel.add(txtUsuario, gbc);
@@ -96,14 +102,12 @@ public class CrearUsuario extends javax.swing.JFrame {
         gbc.gridx = 0; gbc.gridy = 5; panel.add(jLabel6, gbc);
         gbc.gridx = 1; panel.add(cmbPermisos, gbc);
         
-        gbc.gridx = 0; gbc.gridy = 6; gbc.gridwidth = 2;
+        gbc.gridx = 0; gbc.gridy = 6; gbc.gridwidth = 2; 
         gbc.insets = new Insets(20, 10, 10, 10); // Espaciado adicional para los botones
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(btnGuardar);
         buttonPanel.add(btnCancelar);
         panel.add(buttonPanel, gbc);
-
-        add(panel);
     }
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {

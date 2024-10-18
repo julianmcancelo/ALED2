@@ -320,7 +320,7 @@ public class Principal extends javax.swing.JFrame {
     ServicioLogin servicioLogin = new ServicioLogin(); // Asegúrate de que esté configurado correctamente
 
     // Muestra la ventana para cambiar la contraseña
-    CambiarContrasena.mostrarCambiarContrasena(usuarioActual, servicioLogin);
+    CambiarContrasena.mostrarCambiarContrasena(usuarioActual,nombreCompleto, servicioLogin);
     }//GEN-LAST:event_txtCambiarContraseñaActionPerformed
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed

@@ -11,8 +11,8 @@ import java.sql.*;
 
 public class EditarAlumno extends JFrame {
 
-    private JTextField txtDNI; // Campo para el DNI del alumno
-    private JTextField txtApellido; // Campo para el apellido del alumno
+    private final JTextField txtDNI; // Campo para el DNI del alumno
+    private final JTextField txtApellido; // Campo para el apellido del alumno
     private JTextField txtCarrera; // Campo para la carrera del alumno
     private JTextField txtNombres; // Campo para los nombres del alumno
     private JTextField txtLegajo; // Campo para el legajo del alumno
