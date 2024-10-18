@@ -5,6 +5,8 @@
 package beltran;
 
 import beltran.Clases.ServicioLogin;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -136,15 +138,25 @@ public class CambiarContrasena extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCambiarActionPerformed
   
  
-
+public void windowClosing(WindowEvent e) {
+    // Cuando la ventana se cierra, simplemente llama al método "dispose" para deshacerse de la ventana
+    dispose();
+}
     /**
      * @param usuario
      * @param servicioLogin
      */
     public static void mostrarCambiarContrasena(String usuario, ServicioLogin servicioLogin) {
-        java.awt.EventQueue.invokeLater(() -> {
-            new CambiarContrasena(usuario, servicioLogin).setVisible(true);
+    java.awt.EventQueue.invokeLater(() -> {
+        CambiarContrasena ventana = new CambiarContrasena(usuario, servicioLogin);
+        ventana.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                ventana.dispose(); // Llama a dispose para cerrar la ventana
+            }
         });
+        ventana.setVisible(true);
+    });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

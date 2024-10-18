@@ -41,7 +41,6 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="24" max="-2" attributes="0"/>
                       <Component id="lblUsuario" min="-2" pref="99" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                   </Group>
