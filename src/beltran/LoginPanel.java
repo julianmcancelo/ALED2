@@ -1,10 +1,11 @@
 package beltran;
 
 import beltran.Clases.ServicioLogin;
-import beltran.Clases.ServicioLogin.SessionManager;
+import beltran.Clases.SessionManager;
 
 import javax.swing.*;
 import java.awt.*;
+import pruebas.MainFrame;
 
 /**
  * Panel que maneja la interfaz y lógica del inicio de sesión.
@@ -15,12 +16,19 @@ public class LoginPanel extends JPanel {
     private JPasswordField txtContrasena; // Campo para la contraseña
     private JButton btnIniciarSesion; // Botón para iniciar sesión
     private JButton btnCancelar; // Botón para cancelar
+    public JButton btnRecuperarContrasena; // Botón para recuperar contraseña
     private JLabel lblIcono; // Icono en el panel
+    
+   
 
     /**
      * Constructor del panel de inicio de sesión.
+     * @param servicioLogin
+     * @param parentFrame
      */
-    public LoginPanel(ServicioLogin servicioLogin, InicioSesion parentFrame) {
+public LoginPanel(ServicioLogin servicioLogin, InicioSesion parentFrame) {
+            servicioLogin = new ServicioLogin(); // Inicialización
+
         this.servicioLogin = servicioLogin; // Asigna el servicio de login
         initComponents(parentFrame); // Inicializa los componentes
     }
@@ -33,11 +41,13 @@ public class LoginPanel extends JPanel {
         txtContrasena = new JPasswordField(15); // Campo de texto para la contraseña
         btnIniciarSesion = new JButton("Iniciar Sesión"); // Botón para iniciar sesión
         btnCancelar = new JButton("Cancelar"); // Botón para cancelar
+        btnRecuperarContrasena = new JButton("Recuperar Contraseña"); // Botón para recuperar contraseña
         lblIcono = new JLabel(); // Label para el icono
 
         // Configura los eventos de los botones
         btnIniciarSesion.addActionListener(evt -> verificarLogin(parentFrame));
         btnCancelar.addActionListener(evt -> cancelarInicioSesion());
+        btnRecuperarContrasena.addActionListener(evt -> mostrarRecuperarContrasena());
 
         // Cargar icono
         loadIcon();
@@ -77,6 +87,11 @@ public class LoginPanel extends JPanel {
         
         gbc.gridx = 1; 
         add(btnCancelar, gbc);
+        
+        gbc.gridx = 0; 
+        gbc.gridy = 4; 
+        gbc.gridwidth = 2; // Ocupa dos columnas
+        add(btnRecuperarContrasena, gbc); // Añadir el botón de recuperación
     }
 
     /**
@@ -111,12 +126,82 @@ public class LoginPanel extends JPanel {
             String nombreCompleto = resultado.getNombreCompleto(); // Nombre completo del usuario
             SessionManager.isLoggedIn = true; // Establece que el usuario ha iniciado sesión
             JOptionPane.showMessageDialog(this, "¡Bienvenido, " + nombreCompleto + "!");
-            new Principal(nombreCompleto, usuario, resultado.getRolUsuario()).setVisible(true); // Abre la ventana principal
+            new MainFrame(nombreCompleto, usuario, resultado.getRolUsuario()).setVisible(true); // Abre la ventana principal
             parentFrame.dispose(); // Cierra la ventana de inicio de sesión
         } else {
             JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE); // Mensaje de error
         }
     }
+
+    /**
+     * Muestra el diálogo para recuperar la contraseña.
+     */
+    public void mostrarRecuperarContrasena() {
+    JDialog dialog = new JDialog((Frame) null, "Recuperar Contraseña", true);
+    dialog.setSize(350, 300);
+    dialog.setLayout(new GridBagLayout());
+    GridBagConstraints gbc = new GridBagConstraints();
+    gbc.insets = new Insets(10, 10, 10, 10); // Espaciado
+    gbc.fill = GridBagConstraints.HORIZONTAL; // Rellenar en horizontal
+
+    JTextField txtUsuario = new JTextField(15);
+    JTextField txtLegajo = new JTextField(15);
+    JPasswordField txtNuevaContrasena = new JPasswordField(15);
+    JPasswordField txtConfirmarContrasena = new JPasswordField(15);
+
+    gbc.gridx = 0; gbc.gridy = 0;
+    dialog.add(new JLabel("Usuario:"), gbc);
+    gbc.gridx = 1; 
+    dialog.add(txtUsuario, gbc);
+
+    gbc.gridx = 0; gbc.gridy = 1;
+    dialog.add(new JLabel("Legajo:"), gbc);
+    gbc.gridx = 1; 
+    dialog.add(txtLegajo, gbc);
+
+    gbc.gridx = 0; gbc.gridy = 2;
+    dialog.add(new JLabel("Nueva Contraseña:"), gbc);
+    gbc.gridx = 1; 
+    dialog.add(txtNuevaContrasena, gbc);
+
+    gbc.gridx = 0; gbc.gridy = 3;
+    dialog.add(new JLabel("Confirmar Contraseña:"), gbc);
+    gbc.gridx = 1; 
+    dialog.add(txtConfirmarContrasena, gbc);
+
+    JButton btnAceptar = new JButton("Aceptar");
+    JButton btnCancelar = new JButton("Cancelar");
+
+    btnAceptar.addActionListener(evt -> {
+        String usuario = txtUsuario.getText();
+        String legajo = txtLegajo.getText();
+        String nuevaContrasena = new String(txtNuevaContrasena.getPassword());
+        String confirmarContrasena = new String(txtConfirmarContrasena.getPassword());
+
+        if (nuevaContrasena.equals(confirmarContrasena)) {
+            boolean actualizado = servicioLogin.recuperarContrasena(usuario, legajo, nuevaContrasena);
+            if (actualizado) {
+                JOptionPane.showMessageDialog(dialog, "Contraseña actualizada exitosamente.");
+                dialog.dispose();
+            } else {
+                JOptionPane.showMessageDialog(dialog, "Error al actualizar la contraseña.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(dialog, "Las contraseñas no coinciden.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    });
+
+    btnCancelar.addActionListener(evt -> dialog.dispose());
+
+    gbc.gridx = 0; gbc.gridy = 4;
+    gbc.gridwidth = 2; // Ocupa dos columnas
+    dialog.add(btnAceptar, gbc);
+    gbc.gridy = 5;
+    dialog.add(btnCancelar, gbc);
+
+    dialog.setLocationRelativeTo(null); // Centra el diálogo
+    dialog.setVisible(true);
+}
 
     /**
      * Cancela el inicio de sesión.

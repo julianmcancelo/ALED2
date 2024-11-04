@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="dist/Beltran.jar"/>
+	<classpathentry kind="lib" path="dist/lib/core-3.5.3.jar"/>
+	<classpathentry kind="lib" path="dist/lib/flatlaf-3.5.1.jar"/>
+	<classpathentry kind="lib" path="dist/lib/fontbox-3.0.3.jar"/>
+	<classpathentry kind="lib" path="dist/lib/javase-3.5.3.jar"/>
+	<classpathentry kind="lib" path="dist/lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="dist/lib/mysql-connector-j-9.0.0.jar"/>
+	<classpathentry kind="lib" path="dist/lib/mysql-connector-java-5.1.46.jar"/>
+	<classpathentry kind="lib" path="dist/lib/mysql-connector-java-5.1.46-bin.jar"/>
+	<classpathentry kind="lib" path="dist/lib/pdfbox-app-2.0.32.jar"/>
+	<classpathentry kind="lib" path="dist/lib/pdfbox-app-3.0.3.jar"/>
+	<classpathentry kind="lib" path="dist/lib/poi-5.3.0.jar"/>
+	<classpathentry kind="lib" path="dist/lib/poi-ooxml-5.3.0.jar"/>
+	<classpathentry kind="lib" path="dist/lib/xmlbeans-5.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/core-3.5.3.jar"/>
+	<classpathentry kind="lib" path="lib/flatlaf-3.5.1.jar"/>
+	<classpathentry kind="lib" path="lib/javase-3.5.3.jar"/>
+	<classpathentry kind="lib" path="lib/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/junit-platform-console-standalone-1.11.0.jar"/>
+	<classpathentry kind="lib" path="lib/mysql-connector-j-9.0.0.jar"/>
+	<classpathentry kind="lib" path="libs/core-3.5.3.jar"/>
+	<classpathentry kind="lib" path="libs/flatlaf-3.5.1.jar"/>
+	<classpathentry kind="lib" path="libs/javase-3.5.3.jar"/>
+	<classpathentry kind="lib" path="libs/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="libs/mysql-connector-java-5.1.46.jar"/>
+	<classpathentry kind="lib" path="libs/mysql-connector-java-5.1.46-bin.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

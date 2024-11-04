@@ -18,7 +18,9 @@ public class ServicioLogin {
     //private static final String USER = "root";
     //private static final String PASSWORD = ""; // Cambia esto por tu contraseña
     private static final String URL = "jdbc:mysql://190.106.131.13:3306/beltran?useSSL=false";
-
+ public String usuario;
+    public String legajo;
+    public String NuevaContrasena;
 
     private static final String USER = "beltran2024";
    private static final String PASSWORD = "feelthesky1";
@@ -93,6 +95,37 @@ public class ServicioLogin {
         }
     }
 
+    public boolean recuperarContrasena(String usuario, String legajo, String nuevaContrasena) {
+        String sqlVerificar = "SELECT legajo FROM usuarios WHERE usuario = ?";
+        String sqlActualizar = "UPDATE usuarios SET contrasena = ? WHERE usuario = ?";
+
+        try (Connection conexion = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement pstmtVerificar = conexion.prepareStatement(sqlVerificar);
+             PreparedStatement pstmtActualizar = conexion.prepareStatement(sqlActualizar)) {
+
+            // Verificar si el usuario existe y obtener el legajo
+            pstmtVerificar.setString(1, usuario);
+            try (ResultSet rs = pstmtVerificar.executeQuery()) {
+                if (rs.next()) {
+                    String legajoEnBD = rs.getString("legajo");
+                    // Comprobar si el legajo es correcto
+                    if (legajoEnBD.equals(legajo)) {
+                        // Actualizar la contraseña
+                        pstmtActualizar.setString(1, nuevaContrasena); // Aquí deberías aplicar hashing
+                        pstmtActualizar.setString(2, usuario);
+                        pstmtActualizar.executeUpdate();
+                        return true; // Contraseña actualizada correctamente
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace(); // Manejo de excepciones
+        }
+
+        return false; // Usuario o legajo incorrectos
+    }    
+
+ 
     /**
      * Clase interna para encapsular el resultado de la autenticación.
      */
@@ -132,7 +165,7 @@ public class ServicioLogin {
             }
         }
   
-    
+ 
 
 
 
@@ -151,11 +184,6 @@ public class ServicioLogin {
     // Método para cerrar sesión
     public static void cerrarSesion() {
         isLoggedIn = false;
-        // Aquí podrías redirigir al usuario a la ventana de inicio de sesión nuevamente
     }
-}
-public class SessionManager {
-    // Variable estática para indicar si el usuario ha iniciado sesión
-    public static boolean isLoggedIn = false;
 }
 }

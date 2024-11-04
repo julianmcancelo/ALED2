@@ -1,6 +1,6 @@
 package beltran;
 
-import beltran.Clases.ServicioLogin.SessionManager;
+import beltran.Clases.SessionManager;
 import com.formdev.flatlaf.FlatLightLaf; // Importar FlatLaf
 import javax.swing.*;
 import java.awt.*;

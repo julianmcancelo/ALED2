@@ -4,36 +4,37 @@ import beltran.Clases.ServicioLogin;
 import javax.swing.*;
 import java.awt.*;
 
-public class CambiarContrasena extends javax.swing.JFrame {
+public class CambiarContrasena extends JInternalFrame {
     private final ServicioLogin servicioLogin;
     private final String usuario;
     private final String nombreCompleto;
 
     public CambiarContrasena(String usuario, String nombreCompleto, ServicioLogin servicioLogin) {
-        initComponents();
+        super("Cambiar Contraseña", true, true, true, true);
         this.usuario = usuario;
         this.nombreCompleto = nombreCompleto;
         this.servicioLogin = servicioLogin;
 
+        initComponents();
         lblUsuario.setText("Usuario: " + usuario);
         lblNombreCompleto.setText("Nombre Completo: " + nombreCompleto);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         configurarCierreVentana();
-        setSize(400, 300); // Establecer el tamaño de la ventana
-        setLocationRelativeTo(null); // Centrar la ventana en la pantalla
+        setSize(400, 300);
+        setLocation(50, 50);
     }
 
     private void initComponents() {
-        txtContraseñaActual = new javax.swing.JPasswordField();
-        txtContraseñaNueva = new javax.swing.JPasswordField();
-        txtConfirmarContraseña = new javax.swing.JPasswordField();
-        lblUsuario = new javax.swing.JLabel();
-        lblNombreCompleto = new javax.swing.JLabel();
-        btnCambiar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        txtContraseñaActual = new JPasswordField();
+        txtContraseñaNueva = new JPasswordField();
+        txtConfirmarContraseña = new JPasswordField();
+        lblUsuario = new JLabel();
+        lblNombreCompleto = new JLabel();
+        btnCambiar = new JButton();
+        jLabel1 = new JLabel();
+        jLabel2 = new JLabel();
+        jLabel3 = new JLabel();
 
         // Estilo visual
         lblUsuario.setFont(new Font("Arial", Font.BOLD, 14));
@@ -53,7 +54,7 @@ public class CambiarContrasena extends javax.swing.JFrame {
         // Configuración del Layout
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10); // Espaciado entre componentes
+        gbc.insets = new Insets(10, 10, 10, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         gbc.gridx = 0; gbc.gridy = 0;
@@ -81,7 +82,7 @@ public class CambiarContrasena extends javax.swing.JFrame {
         gbc.anchor = GridBagConstraints.CENTER;
         add(btnCambiar, gbc);
 
-        pack(); // Ajustar el tamaño a los componentes
+        pack();
     }
 
     private void btnCambiarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,16 +99,16 @@ public class CambiarContrasena extends javax.swing.JFrame {
 
         if (cambioExitoso) {
             JOptionPane.showMessageDialog(this, "Contraseña cambiada exitosamente.");
-            dispose(); // Cierra la ventana después del cambio exitoso
+            dispose();
         } else {
             JOptionPane.showMessageDialog(this, "La contraseña actual es incorrecta.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     private void configurarCierreVentana() {
-        this.addWindowListener(new java.awt.event.WindowAdapter() {
+        this.addInternalFrameListener(new javax.swing.event.InternalFrameAdapter() {
             @Override
-            public void windowClosing(java.awt.event.WindowEvent e) {
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent e) {
                 int confirm = JOptionPane.showConfirmDialog(null, "¿Estás seguro de que deseas cerrar sin guardar cambios?", "Confirmar", JOptionPane.YES_NO_OPTION);
                 if (confirm == JOptionPane.YES_OPTION) {
                     dispose(); // Cierra la ventana
@@ -116,11 +117,11 @@ public class CambiarContrasena extends javax.swing.JFrame {
         });
     }
 
-    public static void mostrarCambiarContrasena(String usuario, String nombreCompleto, ServicioLogin servicioLogin) {
-        java.awt.EventQueue.invokeLater(() -> {
-            CambiarContrasena ventana = new CambiarContrasena(usuario, nombreCompleto, servicioLogin);
-            ventana.setVisible(true);
-        });
+    public static void mostrarCambiarContrasena(String usuario, String nombreCompleto, ServicioLogin servicioLogin, JDesktopPane desktopPane) {
+        CambiarContrasena ventana = new CambiarContrasena(usuario, nombreCompleto, servicioLogin);
+        desktopPane.add(ventana);
+        ventana.setVisible(true);
+        ventana.toFront();
     }
 
     // Variables declaration - do not modify

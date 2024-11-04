@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import com.formdev.flatlaf.FlatLightLaf; // Importa el look and feel de FlatLaf en modo claro
+import com.formdev.flatlaf.FlatLightLaf;
 
 public class CarrerasPanel extends JPanel {
 
@@ -17,15 +17,15 @@ public class CarrerasPanel extends JPanel {
 
     public CarrerasPanel(MateriaService materiaService) {
         setLayout(new BorderLayout());
-        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Añadir un borde vacío alrededor del panel
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Panel para crear nuevas carreras
         JPanel panelCreacion = new JPanel();
         panelCreacion.setLayout(new GridBagLayout());
-        panelCreacion.setBorder(BorderFactory.createTitledBorder("Crear Nueva Carrera")); // Añadir borde con título
+        panelCreacion.setBorder(BorderFactory.createTitledBorder("Crear Nueva Carrera"));
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5); // Espaciado entre componentes
+        gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         gbc.gridx = 0;
@@ -41,9 +41,9 @@ public class CarrerasPanel extends JPanel {
         gbc.gridy = 1;
         gbc.gridwidth = 2;
         JButton btnRegistrarCarrera = new JButton("Registrar Carrera");
-        btnRegistrarCarrera.setBackground(new Color(34, 150, 243)); // Color de fondo del botón
-        btnRegistrarCarrera.setForeground(Color.WHITE); // Color del texto del botón
-        btnRegistrarCarrera.setFocusPainted(false); // Quitar el borde del botón al recibir el foco
+        btnRegistrarCarrera.setBackground(new Color(34, 150, 243));
+        btnRegistrarCarrera.setForeground(Color.WHITE);
+        btnRegistrarCarrera.setFocusPainted(false);
         btnRegistrarCarrera.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,7 +55,7 @@ public class CarrerasPanel extends JPanel {
         // Panel para seleccionar y cargar carreras
         JPanel panelSeleccion = new JPanel();
         panelSeleccion.setLayout(new BorderLayout());
-        panelSeleccion.setBorder(BorderFactory.createTitledBorder("Cargar Carreras")); // Añadir borde con título
+        panelSeleccion.setBorder(BorderFactory.createTitledBorder("Cargar Carreras"));
 
         cmbCarreras = new JComboBox<>();
         cmbCarreras.setPreferredSize(new Dimension(200, 25));
@@ -63,9 +63,9 @@ public class CarrerasPanel extends JPanel {
         panelSeleccion.add(cmbCarreras, BorderLayout.CENTER);
 
         JButton btnCargarCarreras = new JButton("Cargar Carreras");
-        btnCargarCarreras.setBackground(new Color(34, 150, 243)); // Color de fondo del botón
-        btnCargarCarreras.setForeground(Color.WHITE); // Color del texto del botón
-        btnCargarCarreras.setFocusPainted(false); // Quitar el borde del botón al recibir el foco
+        btnCargarCarreras.setBackground(new Color(34, 150, 243));
+        btnCargarCarreras.setForeground(Color.WHITE);
+        btnCargarCarreras.setFocusPainted(false);
         btnCargarCarreras.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -80,7 +80,7 @@ public class CarrerasPanel extends JPanel {
     }
 
     private void cargarCarreras(JComboBox<String> comboBox) {
-        comboBox.removeAllItems(); // Limpiar el comboBox antes de cargar nuevos elementos
+        comboBox.removeAllItems();
         try (var conn = Conexion.getConnection()) {
             String sql = "SELECT nombre FROM carreras";
             try (PreparedStatement ps = conn.prepareStatement(sql);
@@ -103,8 +103,8 @@ public class CarrerasPanel extends JPanel {
                     ps.setString(1, nombre);
                     ps.executeUpdate();
                     JOptionPane.showMessageDialog(this, "Carrera registrada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    txtNuevaCarrera.setText(""); // Limpiar el campo de texto
-                    cargarCarreras(cmbCarreras); // Actualizar la lista de carreras
+                    txtNuevaCarrera.setText("");
+                    cargarCarreras(cmbCarreras);
                 }
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(this, "Error al registrar carrera: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -114,24 +114,37 @@ public class CarrerasPanel extends JPanel {
         }
     }
 
-public static void main(String[] args) {
-    SwingUtilities.invokeLater(() -> {
-        try {
-            // Configurar el look and feel de FlatLaf en modo claro
-            UIManager.setLookAndFeel(new FlatLightLaf());
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            try {
+                // Configurar el look and feel de FlatLaf en modo claro
+                UIManager.setLookAndFeel(new FlatLightLaf());
 
-            // Crear una instancia de MateriaService
-            MateriaService materiaService = new MateriaService();
+                // Crear un JFrame principal
+                JFrame mainFrame = new JFrame("Aplicación de Gestión");
+                mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                mainFrame.setSize(800, 600);
+                
+                // Crear un JDesktopPane
+                JDesktopPane desktopPane = new JDesktopPane();
+                mainFrame.add(desktopPane);
 
-            JFrame frame = new JFrame("Gestión de Carreras");
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(500, 300);
-            frame.add(new CarrerasPanel(materiaService));
-            frame.setVisible(true);
-        } catch (Exception e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "No se pudo aplicar el tema: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
-    });
-}
+                // Crear un JInternalFrame para CarrerasPanel
+                JInternalFrame gestionCarrerasFrame = new JInternalFrame("Gestión de Carreras", true, true, true, true);
+                gestionCarrerasFrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
+                gestionCarrerasFrame.setSize(600, 400);
+                gestionCarrerasFrame.add(new CarrerasPanel(new MateriaService())); // Pasar MateriaService
+                gestionCarrerasFrame.setVisible(true);
+
+                // Añadir el JInternalFrame al JDesktopPane
+                desktopPane.add(gestionCarrerasFrame);
+
+                // Hacer visible el JFrame principal
+                mainFrame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "No se pudo aplicar el tema: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+    }
 }

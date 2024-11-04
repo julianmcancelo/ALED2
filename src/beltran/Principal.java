@@ -5,10 +5,9 @@
 package beltran;
 import Materias.CarrerasPanel;
 import Materias.MateriaService;
-import Materias.AsistenciaPanel2;
+
 import beltran.Clases.ServicioLogin;
 import beltran.Clases.ServicioLogin.RolUsuario;
-import beltran.Clases.ServicioLogin.SessionManager;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Image;
@@ -18,8 +17,11 @@ import javax.swing.UnsupportedLookAndFeelException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
-import javax.swing.JMenuItem;
+import javax.swing.JInternalFrame;
+import beltran.Clases.SessionManager;
+
 /**
  *
  * @author julia
@@ -266,45 +268,65 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(btnCambiartema)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAdmin)
-                .addGap(21, 21, 21))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1483, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(354, 354, 354)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1483, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAdmin)
+                        .addGap(21, 21, 21))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCambiartema)
                     .addComponent(btnAdmin))
-                .addGap(18, 18, 18))
+                .addGap(71, 71, 71))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmAcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAcercaActionPerformed
-         // Crea un mensaje en formato HTML para mostrar la información en un diálogo
-    String mensaje = "<html><body style='width: 300px; text-align: center;'>"
-            + "<h2>Acerca de la Aplicación</h2>"
-            + "<p>Aplicación desarrollada en Java por:</p>"
-            + "<p><strong>Alumno:</strong> Cancelo Julian Manuel</p>"
-            + "<p><strong>2do Año 1era TN</strong></p>"
-            + "<p><strong>Analista de Sistemas</strong></p>"
-            + "<p><strong>Profesora:</strong> Gabriela Tajes</p>"
-            + "<p><strong>Segundo Parcial y Final de Materia:</strong> Algoritmos y Estructura de Datos</p>"
-            + "<p><strong>Instituto:</strong> Beltran</p>"
-            + "<p>Gracias por utilizar nuestra aplicación.</p>"
-            + "</body></html>";
+          // Crea un mensaje en formato HTML para mostrar la información en un diálogo
 
-    // Muestra el diálogo con la información
-    JOptionPane.showMessageDialog(this, mensaje, "Acerca de la Aplicación", JOptionPane.INFORMATION_MESSAGE);
+String mensaje = """
+<html>
+  <body style='width: 400px; font-family: Arial, sans-serif; text-align: center;'>
+    <h2 style='color: #2c3e50; margin-bottom: 10px;'>Acerca de la Aplicación</h2>
+    <p style='font-size: 15px; color: #34495e;'>Proyecto académico desarrollado en <strong>Java</strong>.</p>
+    
+    <hr style='border: none; height: 1px; background-color: #bdc3c7; margin: 10px 0;'>
+
+    <p><strong>Alumno:</strong> Cancelo Julián Manuel</p>
+    <p><strong>Curso:</strong> 2do Año - 1era TN</p>
+    <p><strong>Programa:</strong> Analista de Sistemas</p>
+
+    <hr style='border: none; height: 1px; background-color: #bdc3c7; margin: 10px 0;'>
+
+    <p><strong>Profesora:</strong> Gabriela Tajes</p>
+    <p><strong>Materia:</strong> Algoritmos y Estructura de Datos</p>
+    <p><strong>Evaluación:</strong> Segundo Parcial y Examen Final</p>
+
+    <hr style='border: none; height: 1px; background-color: #bdc3c7; margin: 10px 0;'>
+
+    <p><strong>Institución:</strong> Instituto Beltrán</p>
+    <p style='font-size: 14px; color: #34495e;'>Gracias por utilizar nuestra aplicación.</p>
+
+    <p style='font-size: 12px; font-style: italic; color: #7f8c8d;'>© 2024 Cancelo Julián Manuel. Todos los derechos reservados.</p>
+  </body>
+</html>
+""";
+
+// Muestra el diálogo con la información
+JOptionPane.showMessageDialog(
+    null, mensaje, "Acerca de la Aplicación", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jmAcercaActionPerformed
 
     private void btnCambiartemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiartemaActionPerformed
@@ -313,18 +335,21 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCambiartemaActionPerformed
 
     private void txtCambiarContraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCambiarContraseñaActionPerformed
-  // Obtén el nombre de usuario desde el contexto de la sesión actual
-    String usuarioActual = usuario; // Implementa este método según tu lógica
 
-    // Crea una instancia de ServicioLogin
-    ServicioLogin servicioLogin = new ServicioLogin(); // Asegúrate de que esté configurado correctamente
-
-    // Muestra la ventana para cambiar la contraseña
-    CambiarContrasena.mostrarCambiarContrasena(usuarioActual,nombreCompleto, servicioLogin);
     }//GEN-LAST:event_txtCambiarContraseñaActionPerformed
 
     private void btnAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminActionPerformed
   // Crear una nueva instancia de Administracion y mostrarla
+      if (rolUsuario != RolUsuario.ADMINISTRADOR) {
+        // Si no tiene permisos, muestra un mensaje de error
+        JOptionPane.showMessageDialog(this, 
+            "No tiene permisos para acceder a esta función.", 
+            "Acceso Denegado", 
+            JOptionPane.ERROR_MESSAGE);
+        return; // Salir del método para evitar que se ejecute el código adicional
+    }
+    // Hacer visible la ventana 
+    
         Administracion admin = new Administracion();
         admin.setVisible(true);    }//GEN-LAST:event_btnAdminActionPerformed
 
@@ -383,20 +408,9 @@ public class Principal extends javax.swing.JFrame {
     frame.setVisible(true);
     }//GEN-LAST:event_gMateriasActionPerformed
 
-    private void gCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gCarrerasActionPerformed
-    MateriaService materiaService = new MateriaService(); // Crear una instancia de MateriaService
-    CarrerasPanel gestionCarrerasPanel = new CarrerasPanel(materiaService); // Pasar la instancia al constructor
-    
-    // Crear un nuevo JFrame para mostrar el panel
-    JFrame frame = new JFrame("Gestión de Carreras");
-    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    frame.setSize(600, 400);
-    frame.add(gestionCarrerasPanel);
-    frame.setVisible(true);    }//GEN-LAST:event_gCarrerasActionPerformed
-
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
  MateriaService materiaService = new MateriaService();
-    AsistenciaPanel2 asistenciaPanel = new AsistenciaPanel2(materiaService);
+    AsistenciaPanel asistenciaPanel = new AsistenciaPanel(materiaService);
     
     JFrame frame = new JFrame("Gestión de Asistencia");
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -414,7 +428,32 @@ public class Principal extends javax.swing.JFrame {
     
  
     }//GEN-LAST:event_jMComisionActionPerformed
-    
+
+    private void gCarrerasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gCarrerasActionPerformed
+MateriaService materiaService = new MateriaService();
+
+        // Crear el JFrame principal
+        JFrame mainFrame = new JFrame("Gestión de Carreras");
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setSize(800, 600);
+
+        // Crear un JDesktopPane
+        JDesktopPane desktopPane = new JDesktopPane();
+        mainFrame.add(desktopPane);
+
+        // Crear un JInternalFrame para CarrerasPanel
+        JInternalFrame gestionCarrerasFrame = new JInternalFrame("Gestión de Carreras", true, true, true, true);
+        CarrerasPanel gestionCarrerasPanel = new CarrerasPanel(materiaService);
+        gestionCarrerasFrame.add(gestionCarrerasPanel);
+        gestionCarrerasFrame.setSize(600, 400);
+        gestionCarrerasFrame.setVisible(true); // Hacer visible el JInternalFrame
+
+        // Añadir el JInternalFrame al JDesktopPane
+        desktopPane.add(gestionCarrerasFrame);
+
+        // Hacer visible el JFrame principal
+        mainFrame.setVisible(true);    }//GEN-LAST:event_gCarrerasActionPerformed
+     
     /**
      * @param args the command line arguments
      */

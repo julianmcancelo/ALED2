@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CrearComisionFrame extends JFrame {
+public class CrearComisionFrame extends JInternalFrame {
 
     private JLabel lblNombre;
     private JTextField txtNombre;
@@ -27,10 +27,9 @@ public class CrearComisionFrame extends JFrame {
     private JPanel panel;
 
     public CrearComisionFrame() {
-        // Configuración de la ventana
-        setTitle("Crear Comisión");
+        super("Crear Comisión", true, true, true, true);
         setSize(400, 300);
-        setLocationRelativeTo(null);
+        setLocation(50, 50); // Puedes ajustar la posición inicial
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         // Inicialización de componentes
@@ -88,7 +87,7 @@ public class CrearComisionFrame extends JFrame {
         gbc.gridy = 5;
         panel.add(btnCancelar, gbc);
 
-        // Añadir panel al JFrame
+        // Añadir panel al JInternalFrame
         add(panel);
 
         // Cargar carreras en el JComboBox
@@ -179,9 +178,5 @@ public class CrearComisionFrame extends JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, "Error al guardar la comisión: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new CrearComisionFrame().setVisible(true));
     }
 }
