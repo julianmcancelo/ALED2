@@ -398,14 +398,7 @@ JOptionPane.showMessageDialog(
     }//GEN-LAST:event_CerrarSesionActionPerformed
 
     private void gMateriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gMateriasActionPerformed
-          MateriaService materiaService = new MateriaService(); // Crear una instancia de MateriaService
-    MateriasPanel materiasPanel = new MateriasPanel(materiaService); // Pasar la instancia al constructor
-    // Si quieres mostrar el panel en una ventana, necesitarás un JFrame
-    JFrame frame = new JFrame("Gestión de Materias");
-    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    frame.setSize(600, 400);
-    frame.add(materiasPanel);
-    frame.setVisible(true);
+
     }//GEN-LAST:event_gMateriasActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed

@@ -5,7 +5,7 @@ import beltran.Clases.SessionManager;
 
 import javax.swing.*;
 import java.awt.*;
-import pruebas.MainFrame;
+import pruebas.PrincipalNuevo;
 
 /**
  * Panel que maneja la interfaz y lógica del inicio de sesión.
@@ -126,7 +126,7 @@ public LoginPanel(ServicioLogin servicioLogin, InicioSesion parentFrame) {
             String nombreCompleto = resultado.getNombreCompleto(); // Nombre completo del usuario
             SessionManager.isLoggedIn = true; // Establece que el usuario ha iniciado sesión
             JOptionPane.showMessageDialog(this, "¡Bienvenido, " + nombreCompleto + "!");
-            new MainFrame(nombreCompleto, usuario, resultado.getRolUsuario()).setVisible(true); // Abre la ventana principal
+            new PrincipalNuevo(nombreCompleto, usuario, resultado.getRolUsuario()).setVisible(true); // Abre la ventana principal
             parentFrame.dispose(); // Cierra la ventana de inicio de sesión
         } else {
             JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE); // Mensaje de error
