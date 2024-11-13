@@ -1,6 +1,5 @@
 package beltran;
 
-import beltran.Clases.ServicioLogin;
 import beltran.Clases.SessionManager;
 
 import javax.swing.*;
@@ -116,22 +115,44 @@ public LoginPanel(ServicioLogin servicioLogin, InicioSesion parentFrame) {
     /**
      * Verifica las credenciales del usuario.
      */
-    private void verificarLogin(InicioSesion parentFrame) {
-        String usuario = txtUsuario.getText(); // Obtiene el usuario
-        String contrasena = new String(txtContrasena.getPassword()); // Obtiene la contraseña
+   private void verificarLogin(InicioSesion parentFrame) {
+    String usuario = txtUsuario.getText(); // Obtiene el usuario
+    String contrasena = new String(txtContrasena.getPassword()); // Obtiene la contraseña
 
-        // Autenticación del usuario
-        ServicioLogin.ResultadoAutenticacion resultado = servicioLogin.autenticar(usuario, contrasena);
-        if (resultado != null) {
-            String nombreCompleto = resultado.getNombreCompleto(); // Nombre completo del usuario
-            SessionManager.isLoggedIn = true; // Establece que el usuario ha iniciado sesión
-            JOptionPane.showMessageDialog(this, "¡Bienvenido, " + nombreCompleto + "!");
-            new PrincipalNuevo(nombreCompleto, usuario, resultado.getRolUsuario()).setVisible(true); // Abre la ventana principal
-            parentFrame.dispose(); // Cierra la ventana de inicio de sesión
-        } else {
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE); // Mensaje de error
-        }
-    }
+   // Verificar si el usuario existe
+boolean usuarioExiste = servicioLogin.verificarUsuarioExistente(usuario);
+if (!usuarioExiste) {
+    // Si el usuario no existe, mostrar mensaje de error
+    JOptionPane.showMessageDialog(this, 
+        "El usuario no existe. Por favor, registre su cuenta o verifique el nombre de usuario.", 
+        "Usuario no encontrado", 
+        JOptionPane.ERROR_MESSAGE);
+    return; // Salir del método sin continuar
+}
+
+// Verificar si la cuenta está validada
+boolean cuentaValida = servicioLogin.verificarCuentaValida(usuario);
+if (!cuentaValida) {
+    // Si la cuenta no está validada, mostrar mensaje de error
+    JOptionPane.showMessageDialog(this, 
+        "La cuenta de usuario no está validada. Por favor, valide su cuenta primero.", 
+        "Cuenta no validada", 
+        JOptionPane.ERROR_MESSAGE);
+    return; // Salir del método sin intentar autenticar
+}
+
+// Si el usuario existe y la cuenta está validada, proceder con la autenticación
+ServicioLogin.ResultadoAutenticacion resultado = servicioLogin.autenticar(usuario, contrasena);
+if (resultado != null) {
+    String nombreCompleto = resultado.getNombreCompleto(); // Nombre completo del usuario
+    SessionManager.isLoggedIn = true; // Establece que el usuario ha iniciado sesión
+    JOptionPane.showMessageDialog(this, "¡Bienvenido, " + nombreCompleto + "!");
+    new PrincipalNuevo(nombreCompleto, usuario, resultado.getRolUsuario()).setVisible(true); // Abre la ventana principal
+    parentFrame.dispose(); // Cierra la ventana de inicio de sesión
+} else {
+    JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE); // Mensaje de error
+}
+}   
 
     /**
      * Muestra el diálogo para recuperar la contraseña.

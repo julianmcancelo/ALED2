@@ -208,10 +208,36 @@ public class CrearUsuario extends javax.swing.JFrame {
         return uuid.toString(); // Retorna el UUID como un string
     }
 
-    private boolean enviarCorreoDeValidacion(String correo, String token) {
-    String asunto = "Verificación de correo electrónico";
-    String mensaje = "Hola, por favor haga clic en el siguiente enlace para verificar su cuenta: \n" +
-                     "http://www.jmcancelo.xyz/validar2.php?token=" + token;
+  private boolean enviarCorreoDeValidacion(String correo, String token) {
+    String asunto = "Verificación de Correo Electrónico - ¡Bienvenido a [Aplicación para Examen Final ALED 2 - Instituto Beltrán]!";
+    String mensaje = "<html>"
+            + "<body style='font-family: Arial, sans-serif; color: #333; line-height: 1.6; background-color: #f4f4f4; padding: 20px;'>"
+            // Se cambia la imagen de fondo por un gris claro (#f4f4f4)
+            + "<div style='background-color: #ffffff; color: #333333; padding: 20px; text-align: center; border-radius: 10px;'>"
+            // Logo agrandado
+            + "<img src='https://ibeltran.com.ar/img/logo/logo1.png' alt='Logo' style='max-width: 300px; height: auto; margin-bottom: 15px; filter: brightness(0) invert(1);'>"
+            + "</div>"
+            + "<div style='background-color: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 8px; margin-top: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>"
+            + "<h2 style='color: #4CAF50;'>¡Gracias por registrarte en el Examen Final de ALED 2!</h2>"
+            + "<p>¡Bienvenido! Hemos recibido una solicitud para crear una cuenta con tu dirección de correo electrónico en el sistema de Examen Final de Algoritmos.</p>"
+            + "<p>Para poder continuar con el proceso, es necesario que verifiques tu cuenta haciendo clic en el siguiente enlace:</p>"
+            + "<p style='text-align: center;'>"
+            + "<a href='http://www.jmcancelo.xyz/validar2.php?token=" + token + "' style='background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;'>Verificar mi cuenta</a>"
+            + "</p>"
+            + "<p style='font-size: 12px;'>Este enlace de verificación será válido solo por <strong>24 horas</strong>. Si no solicitaste este registro, por favor ignora este mensaje.</p>"
+            + "<hr>"
+            + "<p style='font-size: 14px;'>Si tienes algún problema o necesitas asistencia adicional con la verificación, no dudes en contactar a nuestro equipo de soporte:</p>"
+            + "<p style='font-size: 12px;'>"
+            + "📧 <strong>Soporte:</strong> <a href='mailto:soporte@jmcancelo.xyz' style='color: #4CAF50;'>soporte@jmcancelo.xyz</a><br>"
+            + "</p>"
+            + "</div>"
+            // Footer con fondo negro y texto blanco
+            + "<div style='font-size: 12px; color: white; text-align: center; margin-top: 30px; padding: 20px; background-color: #000;'>"
+            + "<p><em>Este correo es parte de un proyecto de prueba para el <strong>Examen Final de Algoritmos en Java</strong> en el curso de 2°1, dictado por la profesora <strong>Gabriela Tajes</strong> en el Instituto Beltrán. Este correo no tiene validez oficial.</em></p>"
+            + "</div>"
+            + "</body>"
+            + "</html>";
+    
 
     // Utiliza JavaMail API para enviar el correo
     try {
@@ -234,7 +260,7 @@ public class CrearUsuario extends javax.swing.JFrame {
         message.setFrom(new InternetAddress("juliancancelo@gmail.com"));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(correo));
         message.setSubject(asunto);
-        message.setText(mensaje);
+        message.setContent(mensaje, "text/html; charset=UTF-8");
 
         // Enviar el mensaje
         Transport.send(message);

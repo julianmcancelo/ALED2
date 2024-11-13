@@ -1,6 +1,5 @@
 package beltran;
 
-import beltran.Clases.ServicioLogin;
 import javax.swing.*;
 import java.awt.*;
 

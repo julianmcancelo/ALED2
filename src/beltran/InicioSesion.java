@@ -1,6 +1,5 @@
 package beltran;
 
-import beltran.Clases.ServicioLogin;
 import com.formdev.flatlaf.FlatIntelliJLaf;
 
 import javax.swing.*;
@@ -38,6 +37,45 @@ public class InicioSesion extends JFrame {
     private void centrarVentana() {
         setLocationRelativeTo(null); // Centra la ventana
     }
+
+    /**
+     * Método para verificar si la cuenta del usuario está validada.
+     * Si la cuenta no está validada, muestra un mensaje de error.
+     * @param usuario Nombre del usuario.
+     * @param contrasena Contraseña del usuario.
+     */
+  public void verificarCuenta(String usuario, String contrasena) {
+    System.out.println("Verificando cuenta para el usuario: " + usuario);  // Depuración
+    boolean cuentaValida = servicioLogin.verificarCuentaValida(usuario);
+
+    if (!cuentaValida) {
+        // Si la cuenta no está validada, mostrar mensaje de error
+        JOptionPane.showMessageDialog(this, 
+                "La cuenta de usuario no está validada. Por favor, valide su cuenta primero.", 
+                "Cuenta no validada", 
+                JOptionPane.ERROR_MESSAGE);
+    } else {
+        // Si la cuenta está validada, proceder con el inicio de sesión
+        System.out.println("Cuenta validada. Verificando credenciales...");
+        ServicioLogin.ResultadoAutenticacion resultado = servicioLogin.autenticar(usuario, contrasena);
+        if (resultado != null) {
+            // Si las credenciales son correctas
+            JOptionPane.showMessageDialog(this, 
+                    "Bienvenido, " + resultado.getNombreCompleto() + "!", 
+                    "Inicio de sesión exitoso", 
+                    JOptionPane.INFORMATION_MESSAGE);
+            // Aquí puedes redirigir a otra ventana si el inicio de sesión es exitoso
+            new Administracion().setVisible(true); // Cambia según tu flujo de la aplicación
+            this.setVisible(false); // Cierra la ventana de inicio de sesión
+        } else {
+            // Si las credenciales son incorrectas
+            JOptionPane.showMessageDialog(this, 
+                    "Usuario o contraseña incorrectos.", 
+                    "Error de autenticación", 
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+}   
 
     /**
      * Método principal para ejecutar la aplicación.

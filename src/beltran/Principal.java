@@ -6,8 +6,7 @@ package beltran;
 import Materias.CarrerasPanel;
 import Materias.MateriaService;
 
-import beltran.Clases.ServicioLogin;
-import beltran.Clases.ServicioLogin.RolUsuario;
+import beltran.ServicioLogin.RolUsuario;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 import java.awt.Image;

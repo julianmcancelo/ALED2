@@ -12,7 +12,7 @@ import Materias.MateriaService;
 import beltran.Administracion;
 import beltran.AsistenciaPanel;
 import beltran.CambiarContrasena;
-import beltran.Clases.ServicioLogin;
+import beltran.ServicioLogin;
 import beltran.CrearComisionFrame;
 import beltran.CrearUsuario;
 import beltran.InicioSesion;
@@ -20,6 +20,7 @@ import beltran.MateriasPanel;
 import beltran.RegistroALumnos;
 import beltran.SeleccionarAlumno;
 import java.awt.event.ActionListener;
+import beltran.GestionUsuariosPanel;
 
 public class PrincipalNuevo extends JFrame {
     private JButton btnCambiartema;
@@ -112,14 +113,15 @@ public class PrincipalNuevo extends JFrame {
         return menu;
     }
 
-    private JMenu createOpcionesMenu() {
-        JMenu menu = new JMenu("Opciones");
-        JMenu adminMenu = new JMenu("Administrador");
-        adminMenu.add(createMenuItem("Crear Usuario", this::jmCrearUsuarioActionPerformed));
-        menu.add(adminMenu);
-        menu.add(createMenuItem("Acerca De", this::jmAcercaActionPerformed));
-        return menu;
-    }
+ private JMenu createOpcionesMenu() {
+    JMenu menu = new JMenu("Opciones");
+    JMenu adminMenu = new JMenu("Administrador");
+    adminMenu.add(createMenuItem("Crear Usuario", this::jmCrearUsuarioActionPerformed));
+    adminMenu.add(createMenuItem("Gestión de Usuarios", this::gestionarUsuariosActionPerformed));  // Nueva opción
+    menu.add(adminMenu);
+    menu.add(createMenuItem("Acerca De", this::jmAcercaActionPerformed));
+    return menu;
+}
 
     private JMenuItem createMenuItem(String text, ActionListener action) {
         JMenuItem item = new JMenuItem(text);
@@ -243,6 +245,18 @@ public class PrincipalNuevo extends JFrame {
         CambiarContrasena.mostrarCambiarContrasena(usuario, nombreCompleto, new ServicioLogin(), desktopPane);
     }
 
+    
+    private void gestionarUsuariosActionPerformed(ActionEvent evt) {
+    JInternalFrame gestionUsuariosFrame = new JInternalFrame("Gestión de Usuarios", true, true, true, true);
+    gestionUsuariosFrame.setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
+    gestionUsuariosFrame.setSize(800, 600);
+    gestionUsuariosFrame.add(new GestionUsuariosPanel());  // Agregar el panel de gestión de usuarios
+    desktopPane.add(gestionUsuariosFrame);
+    gestionUsuariosFrame.setVisible(true);
+    desktopPane.moveToFront(gestionUsuariosFrame);
+}
+    
+    
     private void CerrarSesionActionPerformed(ActionEvent evt) {
         int response = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea cerrar sesión?", "Confirmar Cierre de Sesión", JOptionPane.YES_NO_OPTION);
         if (response == JOptionPane.YES_OPTION) {
@@ -283,6 +297,9 @@ public class PrincipalNuevo extends JFrame {
     // Si el usuario es administrador, se puede abrir la ventana CrearUsuario
     CrearUsuario crearUsuario = new CrearUsuario();
     crearUsuario.setVisible(true); // Hacer visible la ventana de CrearUsuario
+    
+    
+    
         }
 
     private void jmAcercaActionPerformed(ActionEvent evt) {
