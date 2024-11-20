@@ -10,12 +10,11 @@ public class Conexion {
     //private static final String USER = "root"; // Cambia 'tu_usuario' por el nombre de usuario de la base de datos
     //private static final String PASSWORD = ""; // Cambia 'tu_contraseña' por la contraseña de la base de datos
     // Datos de conexión
-    private static final String URL = "jdbc:mysql://190.106.131.13:3306/beltran?useSSL=false";
+    private static final String URL = "jdbc:mysql://167.250.5.55:3306/transpo1_beltran?useSSL=false";
 
 
-    private static final String USER = "beltran2024";
+  private static final String USER = "transpo1_beltran";
    private static final String PASSWORD = "feelthesky1";
-
     private static Connection connection;
 
     static {

@@ -12,9 +12,6 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import java.util.Properties;
 import java.util.UUID;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 
 public class CrearUsuario extends javax.swing.JFrame {
 

@@ -1,9 +1,6 @@
 package beltran;
 
-import beltran.Usuario;
-import beltran.Administracion;
 import static beltran.ServicioLogin.RolUsuario.obtenerConexion;
-import beltran.InicioSesion;
 import com.mysql.jdbc.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -24,7 +21,7 @@ public class ServicioLogin {
     //private static final String URL = "jdbc:mysql://localhost:3306/beltran";
     //private static final String USER = "root";
     //private static final String PASSWORD = ""; // Cambia esto por tu contraseña
-    private static final String URL = "jdbc:mysql://190.106.131.13:3306/beltran?useSSL=false";
+    private static final String URL = "jdbc:mysql://167.250.5.55:3306/transpo1_beltran?useSSL=false";
 
   public static List<Usuario> obtenerUsuarios() {
     List<Usuario> usuarios = new ArrayList<>();
@@ -78,7 +75,7 @@ public static boolean eliminarUsuario(Usuario usuario) {
     public String legajo;
     public String NuevaContrasena;
 
-    private static final String USER = "beltran2024";
+    private static final String USER = "transpo1_beltran";
    private static final String PASSWORD = "feelthesky1";
     /**
      * Autentica al usuario en la base de datos y verifica si la cuenta está validada.

@@ -156,17 +156,19 @@ private boolean reenviarCorreoDeValidacion(String correo, String token) {
     String asunto = "✅ Reenvío de Verificación de Correo Electrónico - Examen Final de Algoritmos en Java";
     String mensaje = "<html>"
             + "<body style='font-family: Arial, sans-serif; color: #333; line-height: 1.6; background-color: #f4f4f4; padding: 20px;'>"
-            // Se cambia la imagen de fondo por un gris claro (#f4f4f4)
+            // Contenedor con fondo blanco para el logo, mejorando la visibilidad sobre cualquier fondo
             + "<div style='background-color: #ffffff; color: #333333; padding: 20px; text-align: center; border-radius: 10px;'>"
-            // Logo agrandado
+            // Logo agrandado para hacerlo más visible y mejorar la legibilidad
             + "<img src='https://ibeltran.com.ar/img/logo/logo1.png' alt='Logo' style='max-width: 300px; height: auto; margin-bottom: 15px; filter: brightness(0) invert(1);'>"
             + "</div>"
             + "<div style='background-color: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 8px; margin-top: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>"
             + "<p>¡Hola! 👋</p>"
+            // Mensaje inicial modificado para ser más amigable
             + "<p>Gracias por registrarte para presentar el <strong>Examen Final de Algoritmos - Java</strong> 💻. Para poder continuar, necesitamos que verifiques tu cuenta.</p>"
             + "<p><strong>Por favor, haz clic en el siguiente enlace para validar tu correo y activar tu acceso:</strong></p>"
             + "<p style='text-align: center;'>"
-            + "<a href='http://www.jmcancelo.xyz/validar2.php?token=" + token + "' style='background-color: #1071B5; color: white; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 18px;'>"
+            // Botón con mayor padding y estilo mejorado
+            + "<a href='http://www.jmcancelo.xyz/validar2.php?token=" + token + "' style='background-color: #1071B5; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 18px; display: inline-block;'>"
             + "✅ Verificar mi cuenta"
             + "</a>"
             + "</p>"
@@ -181,14 +183,15 @@ private boolean reenviarCorreoDeValidacion(String correo, String token) {
             + "</ul>"
             + "<p style='font-size: 14px; color: #555;'>Si tienes alguna duda o necesitas ayuda, no dudes en ponerte en contacto con nosotros:</p>"
             + "<p style='font-size: 14px; color: #555;'>"
+            // Enlaces ahora tendrán el mismo color
             + "📧 <strong>Email de Soporte:</strong> <a href='mailto:soporte@examenfinal.com' style='color: #1071B5;'>soporte@examenfinal.com</a><br>"
             + "📱 <strong>Teléfono de Soporte:</strong> <a href='tel:+1126354636' style='color: #1071B5;'>1126354636</a><br>"
-            + "💬 <strong>WhatsApp:</strong> <a href='https://wa.me/1126354636' style='color: #00A4CC;' target='_blank'>Chatea con nosotros en WhatsApp</a>"
+            + "💬 <strong>WhatsApp:</strong> <a href='https://wa.me/1126354636' style='color: #1071B5;' target='_blank'>Chatea con nosotros en WhatsApp</a>"
             + "</p>"
             + "<br>"
             + "<p style='font-style: italic; font-size: 16px; color: #555;'>¡Te deseamos mucha suerte en el examen! 🍀</p>"
             + "</div>"
-            // Footer con fondo negro y texto blanco
+            // Footer con fondo negro y texto blanco para mejorar la legibilidad
             + "<div style='font-size: 12px; color: white; text-align: center; margin-top: 30px; padding: 20px; background-color: #000;'>"
             + "<p><em>Este correo es parte de una aplicación de prueba para el <strong>Examen Final de Algoritmos - Java</strong> en el curso de 2°1, dictado por <strong>Gabriela Tajes</strong>. No es un correo oficial de ninguna institución educativa, sino un proyecto para evaluar la implementación de una solución en Java.</em></p>"
             + "</div>"
